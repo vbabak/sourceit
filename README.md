@@ -1,2 +1,2 @@
-# sourceit
-Schoolwork for lessons "Development web=applications with using PHP"
+# sourceit study course (Kharkiv, Ukraine)
+Schoolwork for lessons "Development web-applications with using PHP"
