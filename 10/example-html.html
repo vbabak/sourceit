@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>My test page</title>
+</head>
+<body>
+<!-- h1 - заголовок первого уровня -->
+<h1>My test page</h1>
+<!--
+div is a container
+ -->
+<div class="img-wrapper" id="images">
+  <!-- img reflects image -->
+  <img alt="php text" title="php" src="http://php.net/images/logos/php-logo.svg" width="200px">
+</div>
+
+<div class="text">
+  <p>
+    Любой сценарий PHP состоит из последовательности инструкций. Инструкцией может быть присваивание, вызов функции,
+    повтор кода (цикл), сравнение, или даже инструкция, которая ничего не делает (пустой оператор).
+  </p>
+  <p>
+    После инструкции обычно ставится точка с запятой.
+  </p>
+  <!-- заголовок 2го уровня -->
+  <h2>Список управляющих конструкций</h2>
+  <!-- ul - маркированный список -->
+  <ul>
+    <li>if</li>
+    <li>else</li>
+    <li>elseif/else if</li>
+    <li>Альтернативный синтаксис управляющих структур</li>
+    <li>while</li>
+    <li>do-while</li>
+    <li>for</li>
+    <li>foreach</li>
+    <li>break</li>
+    <li>continue</li>
+    <li>switch</li>
+  </ul>
+
+  <h2>Список управляющих конструкций (продожение)</h2>
+  <!-- ol - нумерованный список -->
+  <ol>
+    <li>declare</li>
+    <li>return</li>
+    <li>require</li>
+    <li>include</li>
+    <li>require_once</li>
+    <li>include_once</li>
+    <li>goto</li>
+  </ol>
+</div>
+
+<form action="action.php" method="post" enctype="multipart/form-data">
+  <div>
+    <label for="email2">Email: </label><input name="email" type="email" id="email2" required>
+  </div>
+  <div>
+    <label for="category">Category: </label>
+    <select id="category" name="category">
+      <option value="">--выберите--</option>
+      <option value="audi">Audi</option>
+      <option value="bmw" selected="selected">BMW</option>
+    </select>
+  </div>
+  <div>
+    <label>Меню: </label>
+    <br>
+    <label for="tea">Tea</label><input id="tea" type="checkbox" name="menu[]" value="tea" checked>
+    <br>
+    <label for="cake">Cake</label><input id="cake" type="checkbox" name="menu[]" value="cake">
+  </div>
+  <div>
+    <label>Пол: </label>
+    <input id="male" type="radio" name="gender" value="tea" checked> Male
+    <input id="female" type="radio" name="gender" value="female"> Female
+  </div>
+  <div>
+    <input type="file" name="userpic" accept="image/*,image/jpeg">
+  </div>
+  <div>
+    <input type="submit" value="Submit">
+    <input type="reset" value="Reset">
+  </div>
+</form>
+</body>
+</html>

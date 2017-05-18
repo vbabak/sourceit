@@ -1,0 +1,7 @@
+/*
+ Задаем шрифт для всех элементов
+ */
+* {
+  font-family: Arial, SansSerif;
+  font-size: 21px;
+}
