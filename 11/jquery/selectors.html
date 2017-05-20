@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script
+    src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+  <style type="text/css">
+    .error {
+      color: red;
+    }
+
+    .hide {
+      display: none;
+      /*visibility: hidden;*/
+    }
+  </style>
+
+  <script type="text/javascript">
+    $(function () {
+      var form = $("#user_form");
+      form.on('submit', onSubmit);
+      function onSubmit(event) {
+        var u_name = $('#user_name');
+        var l_name = $('#user_last_name');
+        var valid = true;
+        if (u_name.val().length <= 2) {
+          valid = false;
+          $('#user_name_error').removeClass('hide');
+        } else {
+          $('#user_name_error').addClass('hide');
+        }
+
+        if (l_name.val().length <= 2) {
+          valid = false;
+          $('#user_last_name_error').removeClass('hide');
+        } else {
+          $('#user_last_name_error').addClass('hide');
+        }
+
+        if (!valid) {
+          event.preventDefault();
+        }
+      }
+    });
+  </script>
+</head>
+<body>
+
+<h1>Валидация формы на jQuery</h1>
+
+<form action="" method="post" id="user_form">
+  <div>
+    Имя: <input type="text" id="user_name" value="" placeholder="Имя пользователя" required="required">
+    <div class="error hide" id="user_name_error">Имя пользователя должно быть больше 2х символов</div>
+  </div>
+  <div>
+    Фамилия: <input type="text" id="user_last_name" value="" placeholder="Фамилия пользователя" required="required">
+    <div class="error hide" id="user_last_name_error">Фамилия пользователя должна быть больше 2х символов</div>
+  </div>
+  <div>
+    <input type="submit" value="Отправить">
+  </div>
+</form>
+</body>
+</html>
+

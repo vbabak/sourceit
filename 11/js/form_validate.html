@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style type="text/css">
+    .error {
+      color: red;
+    }
+
+    .hide {
+      display: none;
+      /*visibility: hidden;*/
+    }
+  </style>
+</head>
+<body>
+
+<h1>Валидация формы на JavaScript</h1>
+
+<form action="" method="post" id="user_form">
+  <div>
+    Имя: <input type="text" id="user_name" value="" placeholder="Имя пользователя" required="required">
+    <div class="error hide" id="user_name_error">Имя пользователя должно быть больше 2х символов</div>
+  </div>
+  <div>
+    Фамилия: <input type="text" id="user_last_name" value="" placeholder="Фамилия пользователя" required="required">
+    <div class="error hide" id="user_last_name_error">Фамилия пользователя должна быть больше 2х символов</div>
+  </div>
+  <div>
+    <input type="submit" value="Отправить">
+  </div>
+</form>
+
+<script type="text/javascript">
+  function removeClass(el, cls) {
+    el.className = el.className.replace(cls, '');
+  }
+
+  function addClass(el, cls) {
+    if (el.className.indexOf(cls) === -1) {
+      el.className += ' ' + cls;
+    }
+  }
+
+  function onSubmit(event) {
+    var u_name = document.getElementById('user_name');
+    var l_name = document.getElementById('user_last_name');
+    var valid = true;
+    if (u_name.value.length <= 2) {
+      valid = false;
+      removeClass(document.getElementById('user_name_error'), 'hide');
+    } else {
+      addClass(document.getElementById('user_name_error'), 'hide');
+    }
+
+    if (l_name.value.length <= 2) {
+      valid = false;
+      removeClass(document.getElementById('user_last_name_error'), 'hide');
+    } else {
+      addClass(document.getElementById('user_last_name_error'), 'hide');
+    }
+
+    if (!valid) {
+      event.preventDefault();
+    }
+  }
+
+  var form = document.getElementById("user_form");
+  form.addEventListener('submit', onSubmit);
+</script>
+</body>
+</html>
+

@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script type="text/javascript">
+    // Глобальная видимость
+    var newDiv = document.createElement("div");
+    newDiv.innerHTML = "<h1>Привет!</h1>";
+//    document.body.appendChild(newDiv);
+  </script>
+</head>
+<body>
+
+<p>document.createElement</p>
+
+<script type="text/javascript">
+//  var newDiv = document.createElement("div"); // строчный или блочный ?
+//  newDiv.innerHTML = "<h1>Привет!</h1>";
+  var body = document.body;
+  body.appendChild(newDiv);
+</script>
+</body>
+</html>
+
