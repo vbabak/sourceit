@@ -26,9 +26,7 @@ if (!empty($_POST)) {
               url: "",
               type: "post",
               dataType: "json",
-              data: {
-                name: "Ivan"
-              },
+              data: form.serialize(),
               success: function (response) {
                 console.log(response);
               }
@@ -53,11 +51,11 @@ if (!empty($_POST)) {
 
 <form action="" method="post" id="user_form">
     <div>
-        Имя: <input type="text" id="user_name" value="" placeholder="Имя пользователя">
+        Имя: <input type="text" name="user_name" id="user_name" value="" placeholder="Имя пользователя">
         <div class="error hide" id="user_name_error">Имя пользователя должно быть больше 2х символов</div>
     </div>
     <div>
-        Фамилия: <input type="text" id="user_last_name" value="" placeholder="Фамилия пользователя">
+        Фамилия: <input type="text" name="user_last_name" id="user_last_name" value="" placeholder="Фамилия пользователя">
         <div class="error hide" id="user_last_name_error">Фамилия пользователя должна быть больше 2х символов</div>
     </div>
     <div>
