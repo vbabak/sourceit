@@ -1,0 +1,25 @@
+<?php require_once __DIR__ . "/partials/header.phtml"; ?>
+  <div class="container">
+    <div id="content">
+      <form method="post" action="">
+        <input type="hidden" name="registration" value="registration">
+        <div class="form-group <?php echo !empty($errors['email']) ? 'has-error' : '' ?> ">
+          <label for="email" class="control-label">Email</label>
+          <input type="text" class="form-control" id="email" name="email" placeholder="e-mail" value="<?php echo $_POST['email'] ?? ''?>">
+        </div>
+
+        <div class="form-group <?php echo !empty($errors['password']) ? 'has-error' : '' ?> ">
+          <label for="email" class="control-label">Password</label>
+          <input type="password" class="form-control" id="password" name="password" placeholder="password" value="<?php echo $_POST['password'] ?? ''?>">
+        </div>
+
+        <div class="form-group">
+          <label for="email" class="control-label <?php echo !empty($errors['password2']) ? 'has-error' : '' ?>">Password2</label>
+          <input type="password" class="form-control" id="password2" name="password2" placeholder="password confirm" value="<?php echo $_POST['password2'] ?? ''?>">
+        </div>
+
+        <button type="submit" class="btn btn-default submit">Отправить</button>
+      </form>
+    </div>
+  </div>
+<?php require_once __DIR__ . "/partials/footer.phtml"; ?>

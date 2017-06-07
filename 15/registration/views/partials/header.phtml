@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+          integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+          crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+  <?php if (!IS_LOGGED_IN): ?>
+    <a href="index.php?route=registration">Регистрация</a> &&
+    <a href="index.php?route=auth">Авторизация</a> &&
+    <a href="index.php?route=index">Каталог</a>
+  <?php else: ?>
+    <a href="index.php?route=index">Каталог</a> &&
+    <a href="index.php?route=logout">Выход</a>
+  <?php endif; ?>
+
+  <h1>
+    <?php if ('index' === $route): ?>Каталог<?php endif; ?>
+    <?php if ('auth' === $route): ?>Авторизация<?php endif; ?>
+    <?php if ('registration' === $route): ?>Регистрация<?php endif; ?>
+  </h1>
+</div>
