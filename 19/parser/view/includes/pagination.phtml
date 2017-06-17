@@ -1,0 +1,23 @@
+<?php
+/** @var \Application\Model\Pagination $paginator */
+$paginator = $data['pagination'];
+
+$displayed = '<p> Показано ' . $paginator->getStart() . ' - ' . min($paginator->getStart() + $paginator->getLimit(), $paginator->getTotalItems()) . ' из ' . $paginator->getTotalItems() . '</p>';
+
+$_GET['p'] = '_page_';
+$url .= '?' . http_build_query($_GET);
+?>
+<ul class="pagination">
+  <li class="<?php echo 1 === $paginator->getStartPage() ? 'active' : '' ?>">
+    <a href="<?php echo str_replace(array('%page%', '_page_'), 1, $url); ?>">Начало</a>
+  </li>
+  <?php foreach ($paginator->getLinks() as $p):?>
+    <li class="<?php echo $p === $paginator->getStartPage() ? 'active' : '' ?>">
+      <a href="<?php echo str_replace(array('%page%', '_page_'), $p, $url); ?>"><?php echo $p ?></a>
+    </li>
+  <?php endforeach; ?>
+  <li class="<?php echo $paginator->getTotalPages() === $paginator->getStartPage() ? 'active' : '' ?>">
+    <a href="<?php echo str_replace(array('%page%', '_page_'), $paginator->getTotalPages(), $url); ?>">Конец</a>
+  </li>
+</ul>
+<?php echo $displayed; ?>
