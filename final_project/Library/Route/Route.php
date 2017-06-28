@@ -2,7 +2,7 @@
 
 namespace Library\Route;
 
-class Route
+class Route implements RouteInterface
 {
     protected $namespace;
     protected $controller;
@@ -21,7 +21,7 @@ class Route
         return $this->getData();
     }
 
-    public function getData()
+    public function getData(): array
     {
         return [
             'namespace' => $this->getNamespace(),
@@ -31,23 +31,47 @@ class Route
         ];
     }
 
-    public function getNamespace()
+    public function getNamespace(): string
     {
         return $this->namespace;
     }
 
-    public function getController()
+    public function setNamespace(string $n)
+    {
+        $this->namespace = $n;
+        return $this;
+    }
+
+    public function getController(): string
     {
         return $this->controller;
     }
 
-    public function getAction()
+    public function setController(string $c)
+    {
+        $this->controller = $c;
+        return $this;
+    }
+
+    public function getAction(): string
     {
         return $this->action;
     }
 
-    public function getArgs()
+    public function setAction(string $a)
+    {
+        $this->action = $a;
+        return $this;
+    }
+
+    public function getArgs(): array
     {
         return $this->args;
+    }
+
+    public function setArgs(array $args = array())
+    {
+        $this->args = $args;
+        return $this;
     }
 }

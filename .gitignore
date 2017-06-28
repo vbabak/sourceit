@@ -4,4 +4,4 @@ Vagrantfile
 .DS_Store
 homework
 settings.php
-data/logs
+final_project/app/data/logs/

@@ -2,31 +2,47 @@
 
 namespace Library\Dispatcher;
 
+use Library\Config\ConfigAwareInterface;
+use Library\Config\ConfigFactoryAbstract;
+use Library\Log\LogAwareInterface;
+use Library\Log\LogFactoryAbstract;
 use Library\Route\Route;
 
-class Dispatch
+class Dispatch implements DispatcherInterface
 {
     public function dispatch(Route $route)
     {
         $namespace = $route->getNamespace() . '\Controller\\';
         $controller = $route->getController();
-        $action =  $route->getAction();
+        $action = $route->getAction();
         $args = $route->getArgs();
 
         $controllerClass = '\\' . ucfirst($namespace) . ucfirst($controller) . 'Controller';
         $actionMethod = $action . 'Action';
 
-        try {
-            $controllerInstance = new $controllerClass();
-        } catch (\Throwable $e) {
-            throw new \Exception("Controller not found", 404);
-        }
-
-        if (!method_exists($controllerInstance, $actionMethod)) {
-            throw new \Exception("Action not found", 404);
-        }
+        $controllerInstance = $this->createControllerInstance($controllerClass, $actionMethod);
 
         call_user_func_array(array($controllerInstance, $actionMethod), $args);
+    }
 
+    protected function createControllerInstance($controllerClass, $actionMethod)
+    {
+        $controllerInstance = new $controllerClass();
+
+        if (!method_exists($controllerInstance, $actionMethod)) {
+            throw new \Exception("Action $controllerClass::$actionMethod not found", 404);
+        }
+
+        if ($controllerInstance instanceof LogAwareInterface) {
+            $logger = LogFactoryAbstract::getDefaultLogger();
+            $controllerInstance->setLogger($logger);
+        }
+
+        if ($controllerInstance instanceof ConfigAwareInterface) {
+            $config = ConfigFactoryAbstract::createConfig();
+            $controllerInstance->setConfig($config);
+        }
+
+        return $controllerInstance;
     }
 }
