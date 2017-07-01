@@ -16,4 +16,9 @@ abstract class ControllerAbstract implements LogAwareInterface, ConfigAwareInter
     {
         return APPLICATION_PATH . '/app/Application/views';
     }
+
+    protected function getViewsPath($file)
+    {
+        return $this->getViewsDir() . DIRECTORY_SEPARATOR . $file;
+    }
 }

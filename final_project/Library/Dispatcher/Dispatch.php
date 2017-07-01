@@ -7,6 +7,7 @@ use Library\Config\ConfigFactoryAbstract;
 use Library\Log\LogAwareInterface;
 use Library\Log\LogFactoryAbstract;
 use Library\Route\Route;
+use Library\View\ViewInterface;
 
 class Dispatch implements DispatcherInterface
 {
@@ -22,7 +23,13 @@ class Dispatch implements DispatcherInterface
 
         $controllerInstance = $this->createControllerInstance($controllerClass, $actionMethod);
 
-        call_user_func_array(array($controllerInstance, $actionMethod), $args);
+        $view = call_user_func_array(array($controllerInstance, $actionMethod), $args);
+
+        if (!($view instanceof ViewInterface)) {
+            throw new \Exception('Controller should return instance of ViewInterface', 500);
+        }
+
+        echo $view->render();
     }
 
     protected function createControllerInstance($controllerClass, $actionMethod)

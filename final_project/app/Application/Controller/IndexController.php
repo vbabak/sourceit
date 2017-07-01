@@ -2,10 +2,12 @@
 
 namespace Application\Controller;
 
+use Library\View\HTMLView;
+
 class IndexController extends ControllerAbstract
 {
     public function indexAction()
     {
-        echo 'ok';
+        return new HTMLView($this->getViewsPath('index/index.phtml'));
     }
 }
