@@ -2,8 +2,8 @@
 
 namespace Application\Controller;
 
-use Library\Log\LogFactoryAbstract;
 use Library\Log\LogInterface;
+use Library\View\HTMLView;
 
 class ErrorController extends ControllerAbstract
 {
@@ -14,10 +14,10 @@ class ErrorController extends ControllerAbstract
         if (404 === $exception->getCode()) {
             header($http_version . ' 404 Not Found');
             $logger->log('Requested resource ' . $_SERVER['REQUEST_URI'] . ' not found', LogInterface::INFO);
-            include $this->getViewsDir() . '/error/404.phtml';
+            return new HTMLView($this->getViewsPath('error/404.phtml'));
         } else {
             header($http_version . ' 500 Server Error');
-            include $this->getViewsDir() . '/error/500.phtml';
+            return new HTMLView($this->getViewsPath('error/500.phtml'));
         }
     }
 }

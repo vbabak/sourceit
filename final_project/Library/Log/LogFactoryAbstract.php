@@ -6,6 +6,9 @@ use Library\Config\ConfigFactoryAbstract;
 
 abstract class LogFactoryAbstract
 {
+    /**
+     * @return \Library\Log\FileLogInterface
+     */
     public static function getDefaultLogger()
     {
         $config = ConfigFactoryAbstract::createConfig();

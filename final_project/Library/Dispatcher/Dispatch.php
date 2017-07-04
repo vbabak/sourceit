@@ -2,6 +2,7 @@
 
 namespace Library\Dispatcher;
 
+use Library\Autoload\Autoloader;
 use Library\Config\ConfigAwareInterface;
 use Library\Config\ConfigFactoryAbstract;
 use Library\Log\LogAwareInterface;
@@ -34,7 +35,9 @@ class Dispatch implements DispatcherInterface
 
     protected function createControllerInstance($controllerClass, $actionMethod)
     {
+        Autoloader::loadController($controllerClass);
         $controllerInstance = new $controllerClass();
+
 
         if (!method_exists($controllerInstance, $actionMethod)) {
             throw new \Exception("Action $controllerClass::$actionMethod not found", 404);
@@ -52,4 +55,6 @@ class Dispatch implements DispatcherInterface
 
         return $controllerInstance;
     }
+
+
 }
