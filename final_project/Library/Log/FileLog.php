@@ -30,7 +30,7 @@ class FileLog implements FileLogInterface
     public function setLogDir($dir)
     {
         $this->log_dir = $dir;
-        $this->log_file = $this->log_dir . DIRECTORY_SEPARATOR . 'logs' . date('d.m.Y') . '.log';
+        $this->log_file = $this->log_dir . DIRECTORY_SEPARATOR . 'logs.' . date('d.m.Y') . '.log';
         $this->error_file = $this->log_dir . DIRECTORY_SEPARATOR . 'errors.' . date('d.m.Y') . '.log';
     }
 
@@ -59,10 +59,15 @@ class FileLog implements FileLogInterface
     protected function writeLog($file, $msg)
     {
         $fh = $this->getFileHandler($file);
+        if (!$fh) {
+            return false;
+        }
         // flock($fh, LOCK_EX);
         fwrite($fh, $msg);
         // flock($fh, LOCK_UN);
         fclose($fh);
+
+        return true;
     }
 
     protected function getFileHandler($file)
@@ -72,7 +77,7 @@ class FileLog implements FileLogInterface
         }
         @self::$handlers[$file] = fopen($file, 'a+');
         if (!self::$handlers[$file]) {
-            syslog(LOG_ERR, "Cant open log file $file");
+            syslog(LOG_ERR, "Can't open log file $file");
         }
 
         return self::$handlers[$file];
