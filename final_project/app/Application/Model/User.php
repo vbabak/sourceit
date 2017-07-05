@@ -13,7 +13,7 @@ class User extends DbModelAbstract
     protected $password;
     protected $created;
 
-    public static function findById(int $id): User
+    public static function findById(int $id)
     {
         $pdo = Db::getInstance();
         $sth = $pdo->prepare('SELECT * FROM `users` WHERE `user_id` = :user_id LIMIT 1');

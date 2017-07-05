@@ -7,10 +7,10 @@ use Application\Model\User;
 
 class IndexController extends ControllerAbstract
 {
-    public function indexAction()
+    public function indexAction($id = 0)
     {
-        // $user = User::findById(2);
-        // print_r($user);
+        // $user = User::findById($id);
+        // var_dump($user);
         return new HTMLView($this->getViewsPath('index/index.phtml'));
     }
 }
