@@ -1,0 +1,10 @@
+
+05-07-2017 19:44:48 Code: 0 Message: Return value of Application\Model\User::findById() must be an instance of Application\Model\User, null returned
+/vagrant/final_project/app/Application/Model/User.php:23
+Stack Trace:
+#0 /vagrant/final_project/app/Application/Controller/IndexController.php(13): Application\Model\User::findById(0)
+#1 [internal function]: Application\Controller\IndexController->indexAction()
+#2 /vagrant/final_project/Library/Dispatcher/Dispatch.php(27): call_user_func_array(Array, Array)
+#3 /vagrant/final_project/Library/Application/Application.php(31): Library\Dispatcher\Dispatch->dispatch(Object(Library\Route\Route))
+#4 /vagrant/final_project/public/index.php(6): Library\Application\Application->run()
+#5 {main}
