@@ -1,0 +1,48 @@
+# инициализация пустого репозитория
+
+git init
+
+# клонирование репозитария
+
+git clone [repository]
+
+# обновить локальную копию
+
+git pull
+
+# список веток с последним коммитом
+
+git branch -v
+
+# создаем ветку develop
+
+git checkout -b develop
+
+# делаем коммит
+
+git commit -m 'message'
+
+# пуш develop на сервер
+
+git push -u origin develop
+
+# переключаемся на мастер
+
+git checkout master
+
+# мержим из develop в master
+
+git merge develop
+
+# удаляем локальную ветку
+
+git branch -d develop
+
+# удаляем удаленную ветку
+
+git push origin :develop
+
+# добавить tag
+
+git tag -a v1.4 -m 'my version 1.4'
+
