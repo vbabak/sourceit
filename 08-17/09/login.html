@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .error {
+      color: red;
+    }
+    .form-row {
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+<form action="index.php" method="post">
+
+  <div class="form-row">
+    <input type="text" name="login" value="">
+    <?php if (isset($errors['login'])): ?>
+    <p class="error"><?= $errors['login'] ?></p>
+    <?php endif; ?>
+  </div>
+
+  <div class="form-row">
+    <input type="password" name="password" value="">
+    <?php if (isset($errors['password'])): ?>
+    <p class="error"><?= $errors['password'] ?></p>
+    <?php endif; ?>
+  </div>
+
+  <div class="form-row">
+    <input type="submit" name="submit_login" value="Отправить">
+  </div>
+
+</form>
+</body>
+</html>
