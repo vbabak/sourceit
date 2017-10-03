@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script
+    src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+  <style type="text/css">
+    .help-block {
+      display: none;
+    }
+    .has-error .help-block {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <form action="action.php" method="post" id="login_form">
+    <div class="form-group">
+      <label class="control-label" for="exampleInputEmail1">Email address</label>
+      <input name="email" type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+      <p class="help-block">Explain error</p>
+    </div>
+    <div class="form-group">
+      <label class="control-label" for="user_login">User login</label>
+      <input name="login" type="text" class="form-control" id="user_login" placeholder="User Login">
+      <p class="help-block">Explain error</p>
+    </div>
+    <button id="submit_login_form" type="submit" class="btn btn-default">Submit</button>
+  </form>
+</div>
+<script>
+  // https://learn.jquery.com/using-jquery-core/document-ready/
+$(function () {
+  // https://learn.jquery.com/using-jquery-core/selecting-elements/
+  var btn = $('#submit_login_form');
+//  console.log(btn);
+
+  btn.click(function (e) {
+    e.preventDefault(); // https://developer.mozilla.org/ru/docs/Web/API/Event/preventDefault
+    var form_data = $('#login_form').serialize(); // https://api.jquery.com/serialize/
+    $('#login_form .has-error').removeClass('has-error');
+    // http://api.jquery.com/jquery.ajax/
+    $.ajax({
+      url: "action.php",
+      type: 'post',
+      data: form_data,
+      success: function (response) {
+        if (response.success) {
+        } else {
+          var element;
+          for (var i in response.errors) {
+            element = $('#login_form input[name="'+i+'"]').closest('.form-group'); // найти инпут по аттрибуту (имени). относительно найденного инпута выбрать элемент с классом "form-group" по иерархии вверх.
+            element.addClass('has-error');
+            element.find('.help-block').html(response.errors[i]); // найти дочерний (относительно элемента с классом "form-group") элемент с классом "help-block" и вставить в него html с сервера
+          }
+        }
+      },
+      error: function (response) {
+        console.log(response);
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

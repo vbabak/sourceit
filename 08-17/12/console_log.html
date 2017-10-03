@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+<style type="text/css">
+  .text {
+    color: yellow;
+  }
+  .text2 {
+    color: green;
+  }
+</style>
+<body onclick="console.log('body')">
+
+<p class="text" onclick="handler()">document.createElement</p>
+<p id="text2" onclick="console.log('p#text2')">document.getElementsByTagName</p>
+
+<script type="text/javascript">
+  var elements = document.getElementsByTagName('p');
+  console.log(elements);
+  var handler = function () {
+    var cls = elements[0].className == 'text2' ? 'text' : 'text2';
+    elements[0].className = cls;
+  };
+</script>
+
+</body>
+</html>
