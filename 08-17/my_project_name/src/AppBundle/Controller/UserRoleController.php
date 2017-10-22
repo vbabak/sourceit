@@ -16,7 +16,7 @@ class UserRoleController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $user_roles_repository = $em->getRepository(UserRole::class);
-        $roles = $user_roles_repository->findBy([], 'id', 0, 10);
+        $roles = $user_roles_repository->findBy([], ['code' => 'asc'], 10, 0);
 
         var_dump($roles);
         exit;
