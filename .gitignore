@@ -6,3 +6,5 @@ homework
 settings.php
 final_project/app/data/logs/
 7/file.csv
+vendor
+parameters.yml
