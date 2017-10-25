@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\UserRole;
@@ -14,16 +16,22 @@ class UserRoleController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $page = (int)$request->get('page', 1);
         $em = $this->getDoctrine()->getManager();
+        /** @var \AppBundle\Repository\UserRoleRepository $user_roles_repository */
         $user_roles_repository = $em->getRepository(UserRole::class);
-        $roles = $user_roles_repository->findBy([], ['code' => 'asc'], 10, 0);
+        /** @var \AppBundle\Utils\Pagination\PaginationAbstract $paginatorService */
+        $paginationService = $this->get('mypagination'); // from services.yml
+        $paginationService->setCurrentPage($page);
+        $data = $user_roles_repository->paginate($paginationService, [], ['code' => 'asc']);
 
-        var_dump($roles);
-        exit;
+        // $data = $user_roles_repository->paginate($paginatorService, ['id' => ['value' => 1, 'comparator' => '>']], ['code' => 'asc']);
 
-        // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+        return $this->render('user_role/index.html.twig', [
+            'base_dir' => realpath($this->getParameter('kernel.project_dir')) . DIRECTORY_SEPARATOR,
+            'items' => $data['items'],
+            'links_range' => $data['links_range'],
+            'current_page' => $data['current_page'],
         ]);
     }
 

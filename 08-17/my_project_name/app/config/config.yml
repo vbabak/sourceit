@@ -7,6 +7,9 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    paginator.per_page: 1
+    paginator.display_links: 11
+
 
 framework:
     #esi: ~
@@ -56,9 +59,13 @@ doctrine:
         #path: '%database_path%'
 
     orm:
-        auto_generate_proxy_classes: '%kernel.debug%'
+#        auto_generate_proxy_classes: '%kernel.debug%'
+        auto_generate_proxy_classes: true # proxies makes lazy loading
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
+        metadata_cache_driver: array
+        query_cache_driver: array
+        result_cache_driver: array
 
 # Doctrine Migrations Configuration
 doctrine_migrations:

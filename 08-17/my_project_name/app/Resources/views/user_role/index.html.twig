@@ -1,0 +1,45 @@
+{#
+ Note, to clear cache type
+ php bin/console cache:clear --env prod --no-warmup
+#}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}User Roles{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid">
+        <div id="welcome">
+            <h1>User Roles</h1>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <tr>
+                    <th>#</th>
+                    <th>Role Code</th>
+                </tr>
+                {% for item in items %}
+                    <tr>
+                        <td>{{ item.getId() }}</td>
+                        <td>{{ item.getCode() }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+            {#
+            https://getbootstrap.com/docs/3.3/components/#pagination
+            #}
+            <ul class="pagination">
+                {% for page in links_range %}
+                    <li class="{% if page == current_page %}active{% endif %}"><a href="?page={{ page }}">{{ page }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block stylesheets %}
+{% endblock %}
+
