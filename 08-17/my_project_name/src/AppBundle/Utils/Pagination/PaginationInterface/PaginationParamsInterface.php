@@ -23,4 +23,6 @@ interface PaginationParamsInterface
     public function getNumLinks(): int;
 
     public function getOffset(): int;
+
+    public function getTotalPages(): int;
 }

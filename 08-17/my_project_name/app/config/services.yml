@@ -34,7 +34,12 @@ services:
     #     arguments:
     #         $someArgument: 'some_value'
 
-    mypagination:
-        class: \AppBundle\Utils\Pagination\MyPagination
-        arguments: ['%paginator.per_page%', '%paginator.display_links%']
+    pagination:
+        class: \AppBundle\DependencyInjection\Pagination
+        arguments: ['%pagination.per_page%', '%pagination.display_links%']
         public: true
+
+    twig.extension.text:
+             class: Twig_Extensions_Extension_Text
+             tags:
+                 - { name: twig.extension }

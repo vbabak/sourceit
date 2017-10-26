@@ -12,7 +12,7 @@ class MyPagination extends PaginationAbstract implements PaginationInterface
 
     public function getLinksRange(): array
     {
-        $total_pages = floor($this->getTotalElements() / $this->getPerPage());
+        $total_pages = $this->getTotalPages();
         $next_current_page = (int)min($total_pages, $this->getCurrentPage() + 1); // this is a page in the middle of pagination
         $next_first_page = (int)max(1, $next_current_page - floor($this->getNumLinks() / 2)); // this will be a start page of pagination
         $pages_in_page_range = (int)min($next_first_page + $this->getNumLinks(), $total_pages);

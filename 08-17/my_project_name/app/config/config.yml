@@ -7,8 +7,8 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
-    paginator.per_page: 1
-    paginator.display_links: 11
+    pagination.per_page: 3
+    pagination.display_links: 11
 
 
 framework:
@@ -29,7 +29,8 @@ framework:
     session:
         # https://symfony.com/doc/current/reference/configuration/framework.html#handler-id
         handler_id: session.handler.native_file
-        save_path: '%kernel.project_dir%/var/sessions/%kernel.environment%'
+#        save_path: '%kernel.project_dir%/var/sessions/%kernel.environment%'
+        save_path: ~
     fragments: ~
     http_method_override: true
     assets: ~

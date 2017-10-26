@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace AppBundle\Controller;
 
+use AppBundle\DependencyInjection\Pagination;
 use AppBundle\Entity\UserRole;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -21,7 +22,7 @@ class UserRoleController extends Controller
         /** @var \AppBundle\Repository\UserRoleRepository $user_roles_repository */
         $user_roles_repository = $em->getRepository(UserRole::class);
         /** @var \AppBundle\Utils\Pagination\PaginationAbstract $paginatorService */
-        $paginationService = $this->get('mypagination'); // from services.yml
+        $paginationService = $this->get('pagination'); // from services.yml
         $paginationService->setCurrentPage($page);
         $data = $user_roles_repository->paginate($paginationService, [], ['code' => 'asc']);
 

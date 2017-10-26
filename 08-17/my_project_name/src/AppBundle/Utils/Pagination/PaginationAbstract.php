@@ -8,16 +8,16 @@ use AppBundle\Utils\Pagination\PaginationInterface\PaginationParamsInterface;
 
 abstract class PaginationAbstract implements PaginationParamsInterface
 {
-    /** @var int  */
+    /** @var int */
     protected $current_page = 1;
 
-    /** @var int  */
+    /** @var int */
     protected $per_page = 10;
 
-    /** @var int  */
+    /** @var int */
     protected $total_elements = 0;
 
-    /** @var int  */
+    /** @var int */
     protected $num_links = 7;
 
     /**
@@ -120,9 +120,21 @@ abstract class PaginationAbstract implements PaginationParamsInterface
         $offset = $this->getCurrentPage() * $this->getPerPage() - $this->getPerPage();
         if ($offset < 0) {
             $offset = 0;
-        } else if ($offset > $this->getTotalElements()) {
+        } else if ($offset > $this->getTotalPages()) {
             $offset = $this->getTotalElements();
         }
+
         return $offset;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTotalPages(): int
+    {
+        $total_pages = floor($this->getTotalElements() / $this->getPerPage());
+        $total_pages = max(1, $total_pages);
+
+        return (int)$total_pages;
     }
 }
